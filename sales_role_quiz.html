@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales Role Assessment Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f0f0f0;
+      border-left: 5px solid #007BFF;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Sales Role Assessment Quiz</h1>
+<p>For each statement, rate yourself from 1 (Strongly Disagree) to 4 (Strongly Agree).</p>
+
+<form id="quizForm">
+  <div class="question" data-type="accelerator">
+    <strong>1. I thrive on finding new business opportunities and actively seek out potential customers.</strong>
+    <label><input type="radio" name="q1" value="1" required> 1</label>
+    <label><input type="radio" name="q1" value="2"> 2</label>
+    <label><input type="radio" name="q1" value="3"> 3</label>
+    <label><input type="radio" name="q1" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="accelerator">
+    <strong>2. I enjoy the excitement of closing deals quickly and moving on to the next opportunity.</strong>
+    <label><input type="radio" name="q2" value="1" required> 1</label>
+    <label><input type="radio" name="q2" value="2"> 2</label>
+    <label><input type="radio" name="q2" value="3"> 3</label>
+    <label><input type="radio" name="q2" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="sustainer">
+    <strong>3. I focus on maintaining strong relationships with existing clients and ensuring they continue to see value in our products/services.</strong>
+    <label><input type="radio" name="q3" value="1" required> 1</label>
+    <label><input type="radio" name="q3" value="2"> 2</label>
+    <label><input type="radio" name="q3" value="3"> 3</label>
+    <label><input type="radio" name="q3" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="accelerator">
+    <strong>4. I am comfortable handling objections and rejection without letting it affect my confidence.</strong>
+    <label><input type="radio" name="q4" value="1" required> 1</label>
+    <label><input type="radio" name="q4" value="2"> 2</label>
+    <label><input type="radio" name="q4" value="3"> 3</label>
+    <label><input type="radio" name="q4" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="sustainer">
+    <strong>5. I prioritize keeping customers happy, solving their problems, and increasing their lifetime value.</strong>
+    <label><input type="radio" name="q5" value="1" required> 1</label>
+    <label><input type="radio" name="q5" value="2"> 2</label>
+    <label><input type="radio" name="q5" value="3"> 3</label>
+    <label><input type="radio" name="q5" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="architect">
+    <strong>6. I enjoy both bringing in new customers and working closely with existing ones to maintain and grow their accounts.</strong>
+    <label><input type="radio" name="q6" value="1" required> 1</label>
+    <label><input type="radio" name="q6" value="2"> 2</label>
+    <label><input type="radio" name="q6" value="3"> 3</label>
+    <label><input type="radio" name="q6" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="accelerator">
+    <strong>7. I am driven by hitting quotas and achieving short-term sales goals.</strong>
+    <label><input type="radio" name="q7" value="1" required> 1</label>
+    <label><input type="radio" name="q7" value="2"> 2</label>
+    <label><input type="radio" name="q7" value="3"> 3</label>
+    <label><input type="radio" name="q7" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="sustainer">
+    <strong>8. I take a consultative approach, working closely with customers to ensure they are using our solutions effectively.</strong>
+    <label><input type="radio" name="q8" value="1" required> 1</label>
+    <label><input type="radio" name="q8" value="2"> 2</label>
+    <label><input type="radio" name="q8" value="3"> 3</label>
+    <label><input type="radio" name="q8" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="architect">
+    <strong>9. I can switch between prospecting and nurturing relationships based on the needs of the business.</strong>
+    <label><input type="radio" name="q9" value="1" required> 1</label>
+    <label><input type="radio" name="q9" value="2"> 2</label>
+    <label><input type="radio" name="q9" value="3"> 3</label>
+    <label><input type="radio" name="q9" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="accelerator">
+    <strong>10. I prefer making quick sales rather than taking the time to develop deep, long-term client relationships.</strong>
+    <label><input type="radio" name="q10" value="1" required> 1</label>
+    <label><input type="radio" name="q10" value="2"> 2</label>
+    <label><input type="radio" name="q10" value="3"> 3</label>
+    <label><input type="radio" name="q10" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="sustainer">
+    <strong>11. I proactively check in with clients after a sale to ensure their continued success and satisfaction.</strong>
+    <label><input type="radio" name="q11" value="1" required> 1</label>
+    <label><input type="radio" name="q11" value="2"> 2</label>
+    <label><input type="radio" name="q11" value="3"> 3</label>
+    <label><input type="radio" name="q11" value="4"> 4</label>
+  </div>
+
+  <div class="question" data-type="architect">
+    <strong>12. I measure my success by both the number of new deals I close and the growth of my existing accounts.</strong>
+    <label><input type="radio" name="q12" value="1" required> 1</label>
+    <label><input type="radio" name="q12" value="2"> 2</label>
+    <label><input type="radio" name="q12" value="3"> 3</label>
+    <label><input type="radio" name="q12" value="4"> 4</label>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<div class="result" id="result" style="display:none;"></div>
+
+<script>
+document.getElementById("quizForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const scores = { accelerator: 0, sustainer: 0, architect: 0 };
+  const questions = document.querySelectorAll(".question");
+
+  questions.forEach(q => {
+    const type = q.getAttribute("data-type");
+    const val = parseInt(q.querySelector("input:checked").value);
+    scores[type] += val;
+  });
+
+  let topType = "architect";
+  let maxScore = scores.architect;
+
+  if (scores.accelerator > maxScore) {
+    topType = "accelerator";
+    maxScore = scores.accelerator;
+  }
+
+  if (scores.sustainer > maxScore) {
+    topType = "sustainer";
+    maxScore = scores.sustainer;
+  }
+
+  const resultText = {
+    accelerator: "<strong>You are an Accelerator!</strong><br>You thrive on finding and closing new business quickly.",
+    sustainer: "<strong>You are a Sustainer!</strong><br>You excel at maintaining long-term client relationships.",
+    architect: "<strong>You are an Architect!</strong><br>You balance acquisition and retention like a pro."
+  };
+
+  const resultBox = document.getElementById("result");
+  resultBox.innerHTML = resultText[topType];
+  resultBox.style.display = "block";
+});
+</script>
+
+</body>
+</html>
