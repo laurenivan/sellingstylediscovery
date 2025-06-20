@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
+      background: #f8f8f8;
       max-width: 700px;
       margin: 2rem auto;
       padding: 1rem;
@@ -16,80 +16,81 @@
     h1 {
       text-align: center;
     }
-    form {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
     .question {
       margin-bottom: 1.5rem;
     }
     .question p {
-      margin-bottom: 0.5rem;
-    }
-    .options {
-      display: flex;
-      justify-content: space-between;
+      font-weight: bold;
     }
     .options label {
-      flex: 1;
-      text-align: center;
-    }
-    button {
-      display: block;
-      margin: 2rem auto 0 auto;
-      padding: 0.8rem 1.8rem;
-      font-size: 1rem;
-      background: #0066cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #004a99;
+      margin-right: 10px;
     }
     #result {
       margin-top: 2rem;
       font-size: 1.2rem;
       font-weight: bold;
       text-align: center;
-      padding: 1rem;
-      border-radius: 8px;
-    }
-    .accelerator {
-      background: #d4edda;
-      color: #155724;
-    }
-    .sustainer {
-      background: #fff3cd;
-      color: #856404;
-    }
-    .architect {
-      background: #d1ecf1;
-      color: #0c5460;
     }
   </style>
 </head>
 <body>
   <h1>Style Discovery Quiz</h1>
   <form id="quizForm">
-    <div id="questions-container"></div>
-    <button type="submit">See My Result</button>
+    <!-- 20 questions -->
+    <div id="questionsContainer"></div>
+
+    <div style="text-align: center;">
+      <button type="submit">See My Result</button>
+    </div>
   </form>
   <div id="result"></div>
 
   <script>
-    const questions = [
-      "I enjoy taking on new challenges.",
-      "I prefer stable and predictable environments.",
-      "I like designing and planning projects.",
-      "I feel energized by fast-paced situations.",
-      "I value consistency and reliability.",
-      "I like brainstorming creative ideas.",
-      "I enjoy leading and influencing others.",
-      "I prefer to follow established procedures.",
-      "I find satisfaction in solving complex problems.",
-      "I like working independently.",
-      "I appreciate feedback a
+    const questionsContainer = document.getElementById('questionsContainer');
+    const form = document.getElementById('quizForm');
+    const resultDiv = document.getElementById('result');
+
+    // Dynamically create 20 questions
+    for (let i = 1; i <= 20; i++) {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'question';
+      qDiv.innerHTML = `
+        <p>Question ${i}:</p>
+        <div class="options">
+          ${[1,2,3,4,5].map(num => `
+            <label><input type="radio" name="q${i}" value="${num}" required> ${num}</label>
+          `).join('')}
+        </div>
+      `;
+      questionsContainer.appendChild(qDiv);
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(form);
+      let total = 0;
+
+      for (let i = 1; i <= 20; i++) {
+        const val = formData.get(`q${i}`);
+        if (!val) {
+          resultDiv.textContent = "Please answer all questions.";
+          return;
+        }
+        total += parseInt(val, 10);
+      }
+
+      const average = total / 20;
+      let type = '';
+      if (average <= 2) {
+        type = "Sustainer";
+      } else if (average <= 3.5) {
+        type = "Architect";
+      } else {
+        type = "Accelerator";
+      }
+
+      resultDiv.textContent = `You are an: ${type}`;
+    });
+  </script>
+</body>
+</html>
