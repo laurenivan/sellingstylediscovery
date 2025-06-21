@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Survey Questions</title>
+  <title>Discovering your Selling Style Assessment</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -43,7 +43,7 @@
   </style>
 </head>
 <body>
-  <h1>Sales Personality Survey</h1>
+  <h1>Discovering your Selling Style Assessment</h1>
   <form id="survey-form">
     <div id="questions-container"></div>
     <button type="submit">Submit</button>
@@ -88,4 +88,24 @@
         <div>
           ${[1, 2, 3, 4, 5].map(num => `
             <label>
-              <input type="radio" name="q${i
+              <input type="radio" name="q${i + 1}" value="${num}" required /> ${num}
+            </label>
+          `).join(' ')}
+        </div>
+      `;
+      questionsContainer.appendChild(qDiv);
+    });
+
+    document.getElementById('survey-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const results = {};
+      for (let i = 1; i <= questionTexts.length; i++) {
+        results[`q${i}`] = formData.get(`q${i}`);
+      }
+      console.log('Survey results:', results);
+      alert('Thanks for submitting the survey! Check console for results.');
+    });
+  </script>
+</body>
+</html>
