@@ -2,109 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Discovering your Selling Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Role Assessment Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
       max-width: 800px;
       margin: 2rem auto;
-      padding: 0 1rem;
+      padding: 1rem;
+      color: #333;
     }
-    h1 {
+    h1, h2 {
       text-align: center;
     }
     .question {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 1rem;
+      margin: 1.5rem 0;
     }
-    .scale-labels {
-      display: flex;
-      justify-content: space-between;
+    .question p {
       font-weight: bold;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
     }
-    label {
-      margin-right: 1rem;
-      cursor: pointer;
-    }
-    input[type="radio"] {
-      margin-right: 0.25rem;
+    .result {
+      display: none;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: #e0ffe0;
+      border: 1px solid #b2d8b2;
+      text-align: center;
     }
     button {
       display: block;
       margin: 2rem auto;
-      padding: 0.75rem 2rem;
+      padding: 0.5rem 2rem;
       font-size: 1rem;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Discovering your Selling Style Assessment</h1>
-  <form id="survey-form">
-    <div id="questions-container"></div>
+  <h1>Sales Style Discovery Quiz</h1>
+  <form id="quizForm">
+    <div id="questions"></div>
     <button type="submit">Submit</button>
   </form>
+  <div class="result" id="result"></div>
 
   <script>
-    const questionTexts = [
-      "I thrive on finding new business opportunities and actively seek out potential customers.",
+    const questions = [
+      "I thrive on interacting with new leads and actively seek out potential customers.",
       "I enjoy the excitement of closing deals quickly and moving on to the next opportunity.",
       "I focus on maintaining strong relationships with existing customers and ensuring they continue to see value in our products or services.",
-      "I am comfortable handling objections and rejection without letting it affect my confidence.",
+      "I am comfortable handling objections and hesitations without letting it affect my confidence.",
       "I prioritize keeping customers happy and resolving their issues to ensure long-term satisfaction.",
-      "I enjoy both acquiring new customers and maintaining relationships with existing ones.",
+      "I enjoy both acquiring new leads and maintaining relationships with existing members.",
       "I am driven by hitting sales targets and achieving short-term goals.",
       "I work closely with customers to help them get the most out of our solutions.",
-      "I easily switch between prospecting for new customers and supporting existing accounts.",
+      "I easily switch between actively engaging with new inbound leads and supporting existing leads in my pipeline.",
       "I prefer fast-paced sales cycles and quick wins over long-term relationship building.",
       "I proactively check in with customers after the sale to ensure ongoing success.",
       "I measure success by how many new customers I bring in and how existing accounts grow over time.",
-      "I don’t let a “no” from a prospect stop me from reaching my goals.",
-      "I invest time in understanding my customer’s business needs before recommending a solution.",
-      "I feel confident both in presenting to new leads and in managing ongoing relationships.",
-      "I feel most successful when I exceed my individual sales quota.",
+      "I don’t let a “no” from a customer stop me from reaching my goals.",
+      "I invest time in understanding my customer’s needs before presenting a personalized solution.",
+      "I feel confident both in presenting to new customers and in managing ongoing customers relationships.",
+      "I feel most successful when I exceed my individual sales goals.",
       "I have a reputation for being dependable and trusted by my customers.",
       "I approach each sales conversation with a clear strategy in mind.",
-      "I consistently go above and beyond to provide value after the initial sale.",
-      "I adjust my sales approach based on the specific needs and buying behaviors of each customer."
+      "I consistently go above and beyond to provide value and stay connected to the customer after the initial sale.",
+      "I adjust my sales approach based on the specific needs of each customer."
     ];
 
-    const questionsContainer = document.getElementById('questions-container');
+    const questionsContainer = document.getElementById('questions');
+    const form = document.getElementById('quizForm');
+    const resultDiv = document.getElementById('result');
 
-    questionTexts.forEach((text, i) => {
+    const results = [
+      { title: 'Accelerator', min: 1, max: 33 },
+      { title: 'Sustainer', min: 34, max: 67 },
+      { title: 'Architect', min: 68, max: 100 }
+    ];
+
+    questions.forEach((text, i) => {
       const qDiv = document.createElement('div');
       qDiv.className = 'question';
-
       qDiv.innerHTML = `
-        <p><strong>${i + 1}. ${text}</strong></p>
-        <div class="scale-labels">
-          <span>Strongly Disagree</span>
-          <span>Strongly Agree</span>
-        </div>
-        <div>
-          ${[1, 2, 3, 4, 5].map(num => `
-            <label>
-              <input type="radio" name="q${i + 1}" value="${num}" required /> ${num}
-            </label>
-          `).join(' ')}
-        </div>
+        <p>${i + 1}. ${text}</p>
+        ${[1, 2, 3, 4, 5].map(num => `
+          <label>
+            <input type="radio" name="q${i + 1}" value="${num}" required /> ${num}
+          </label>
+        `).join(' ')}
       `;
       questionsContainer.appendChild(qDiv);
     });
 
-    document.getElementById('survey-form').addEventListener('submit', e => {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const formData = new FormData(e.target);
-      const results = {};
-      for (let i = 1; i <= questionTexts.length; i++) {
-        results[`q${i}`] = formData.get(`q${i}`);
+      let score = 0;
+      for (let i = 1; i <= questions.length; i++) {
+        const selected = form[`q${i}`].value;
+        score += parseInt(selected);
       }
-      console.log('Survey results:', results);
-      alert('Thanks for submitting the survey! Check console for results.');
+
+      let resultText = 'No result';
+      for (const r of results) {
+        if (score >= r.min && score <= r.max) {
+          resultText = `You are an <strong>${r.title}</strong>!`;
+          break;
+        }
+      }
+
+      resultDiv.innerHTML = resultText;
+      resultDiv.style.display = 'block';
+      window.scrollTo(0, document.body.scrollHeight);
     });
   </script>
 </body>
